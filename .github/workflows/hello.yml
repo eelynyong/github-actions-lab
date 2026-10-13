@@ -10,6 +10,7 @@ permissions:
 jobs:
   hello-job:
     runs-on: ubuntu-latest
+    environment: development
 
     env:
       APP_ENV: development
@@ -40,3 +41,15 @@ jobs:
             echo "ERROR: Repository secret is missing."
             exit 1
           fi
+      
+      - name: Check environment secret
+        env:
+          ENV_DEMO_TOKEN: ${{ secrets.ENV_DEMO_TOKEN }}
+        run: |
+          if [ -n "$ENV_DEMO_TOKEN" ]; then
+            echo "Environment secret is configured."
+          else
+            echo "ERROR: Environment secret is missing."
+            exit 1
+          fi
+
