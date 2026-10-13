@@ -1,0 +1,31 @@
+name: My First GitHub Actions Workflow
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: development
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Say hello
+        run: echo "Hello from GitHub Actions!"
+
+      - name: Read my file
+        run: cat hello.txt
+
+      - name: Show environment
+        run: echo "Environment is $APP_ENV"
+
+      - name: Show current branch
+        run: echo "Branch is $GITHUB_REF_NAME"
